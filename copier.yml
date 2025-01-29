@@ -1,0 +1,33 @@
+entry:
+  type: str
+  help: Choose branch1
+  choices:
+    - branch0
+    - branch1
+
+branch0:
+  type: str
+  help: Give a name
+  placeholder: e.g. Linus
+  when: >-
+    {{ entry == 'branch0' }}
+  validator: >-
+    {% if not (branch0 | regex_search('^[a-zA-Z][a-zA-Z-0-9]+$')) %}
+    {{github_org}} must be lower case AlphaNumeric and start with a letter,
+    it may contain hyphens
+    {% endif -%}
+
+branch1:
+  type: str
+  help: Give a name
+  placeholder: e.g. Bill
+  when: >-
+    {{ entry == 'branch1' }}
+  validator: >-
+    {% if not (branch0 | regex_search('^[a-zA-Z][a-zA-Z-0-9]+$')) %}
+    {{github_org}} must be lower case AlphaNumeric and start with a letter,
+    it may contain hyphens
+    {% endif -%}
+  choices:
+    - bill
+    - gates
